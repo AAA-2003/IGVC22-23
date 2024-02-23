@@ -33,10 +33,9 @@ rosloaunch pointcloud_to_lasercan ranger.launch```
 
 BUILD:
 1. Bind PhidgetUSB module with WSL: https://learn.microsoft.com/en-us/windows/wsl/connect-usb
-2.Follow: https://github.com/ros-drivers/phidgets_drivers to get phidgets_drivers package installed
-      Note: make sure to finish Udev Rules setup process
-3. Reinstall package from ROS package index to fix nodelet error: 'sudo apt install ros-noetic-phidgets-spatial'
-4. build wih 'catkin_make'
+2. Follow: https://github.com/ros-drivers/phidgets_drivers to get phidgets_drivers package installed (Note: make sure to finish Udev Rules setup process)
+4. Reinstall package from ROS package index to fix nodelet error: 'sudo apt install ros-noetic-phidgets-spatial'
+5. build wih 'catkin_make'
 
 Usage:
 - 'roslaunch phidgets_spatial/launch/spatial.launch' launches spatial node which publishes /imu/data (containing Imu message in ENU form)
