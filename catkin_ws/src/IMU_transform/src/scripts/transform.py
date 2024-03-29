@@ -16,36 +16,38 @@ def rec(msg):
         #rospy.loginfo(msg.data_raw)
         #print(msg.linearAcceleration.x)
         #publish_msg(msg)
-        rospy.loginfo(msg.header.frame_id)
-        IMU_data.header.frame_id = msg.header.frame_id
-        IMU_data.orientation.x = msg.orientation.x
-        IMU_data.orientation.y = msg.orientation.y
-        IMU_data.orientation.z = msg.orientation.z
+	rospy.loginfo(msg.header.frame_id)
+	IMU_data.header.frame_id = msg.header.frame_id
+	IMU_data.orientation.x = msg.orientation.x
+	IMU_data.orientation.y = msg.orientation.y
+	IMU_data.orientation.z = msg.orientation.z
 
-        IMU_data.angular_velocity.x = msg.angular_velocity.x
-        IMU_data.angular_velocity.y = msg.angular_velocity.y
-        IMU_data.angular_velocity.z = msg.angular_velocity.z
+	IMU_data.angular_velocity.x = msg.angular_velocity.x
+	IMU_data.angular_velocity.y = msg.angular_velocity.y
+	IMU_data.angular_velocity.z = msg.angular_velocity.z
 
-        IMU_data.linear_acceleration.x = msg.linear_acceleration.x
-        IMU_data.linear_acceleration.y = msg.linear_acceleration.y
-        IMU_data.linear_acceleration.z = msg.linear_acceleration.z
+	IMU_data.linear_acceleration.x = msg.linear_acceleration.x
+	IMU_data.linear_acceleration.y = msg.linear_acceleration.y
+	IMU_data.linear_acceleration.z = msg.linear_acceleration.z
 
-        transform(IMU_data)
+	transform(IMU_data)
 
 #used to transfrom Imu type data if needed
 #TO BE UPDATED BASED ON FRAME OF REFERENCE FROM SENSOR
 def transform(sensor_data):
-        sensor_data.orientation.x += 0
-        sensor_data.orientation.y += 0
-        sensor_data.orientation.z += 0
+	temp1 = sensor_data.orientation.x
+	sensor_data.orientation.x = sensor_data.orientation.y
+	sensor_data.orientation.y = temp1
+	sensor_data.orientation.z *= -1
 
-        sensor_data.angular_velocity.x *= -1
-        sensor_data.angular_velocity.y += 0
-        sensor_data.angular_velocity.z += 0
+	sensor_data.angular_velocity.x += 0
+	sensor_data.angular_velocity.y += 0
+	sensor_data.angular_velocity.z += 0
 
-        sensor_data.linear_acceleration.x += 0
-        sensor_data.linear_acceleration.y += 0
-        sensor_data.linear_acceleration.z += 0
+	temp2 = sensor_data.linear_acceleration.x
+	sensor_data.linear_acceleration.x = sensor_data.linear_acceleration.y
+	sensor_data.linear_acceleration.y = temp2
+	sensor_data.linear_acceleration.z *= -1
 
 #publisher for transformed IMU message
 #publishes at specified rate
