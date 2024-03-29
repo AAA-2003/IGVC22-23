@@ -40,6 +40,25 @@ The range used to identify the gray road color is:
   After the image is generated, we run a for loop to save a list of all the white pixels in the image. This is output to a file called white_pixels.txt.
 
 
+*IMU Phidget Spatial 3/3/3*
+
+Build:
+1. Follow: https://github.com/ros-drivers/phidgets_drivers to get phidget drivers installed
+2. Reinstall from a different source to fix build: sudo apt install ros-noetic-phidgets-spatial
+3. catkin_make
+4. Bind PhidgetUSB module with WSL: https://learn.microsoft.com/en-us/windows/wsl/connect-usb
+
+Launching IMU:
+in shell: Bind IMU to WSL
+1. usbipd list
+2. usbipd attach --wsl --busid 2-2
+Launch phidgets spatial node and run IMU transform script on ubuntu:
+3. roslaunch phidgets_drivers/phidgets_spatial/launch/spatial.launch
+4. python3 IMU_transform/src/scripts/transform.py
+
+
+
+
 ```roscore
 cd catkin_ws
 source devel/setup.bash
