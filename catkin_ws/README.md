@@ -27,6 +27,7 @@ Running the code
 cd catkin_ws
 source devel/setup.bash
 rosloaunch pointcloud_to_lasercan ranger.launch```
+```
 
 *IMU Phidget Spatial 3/3/3*
 
